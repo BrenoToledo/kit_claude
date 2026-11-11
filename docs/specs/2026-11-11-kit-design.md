@@ -93,6 +93,16 @@ Quem executa uma tarefa não lê requisitos nem outras tarefas. É isso que mant
 - Mudança em contrato congelado não é feita pela tarefa: volta para o desenho, e as tarefas que usam aquele contrato são reabertas.
 - Ao terminar, atualiza a tarefa e `ESTADO.md`.
 
+### Claude como orquestrador de outras IAs
+
+Papéis: o Claude cuida de requisitos, desenho, contratos, plano e revisão. Tarefas bem delimitadas podem ir para um executor mais barato, como o Antigravity (`agy`), tratado como um júnior.
+
+- **Quem pode ser delegada:** tarefa com contrato congelado, critério de pronto verificável por teste e sem decisão de desenho em aberto. O plano marca o campo `executor` de cada tarefa (`claude`, `claude-menor` ou `agy`).
+- **Como:** o Claude Code chama o Antigravity em modo não interativo (`agy -p`), passando só o caminho do arquivo da tarefa. O executor lê a tarefa, os contratos citados e o `AGENTS.md`.
+- **Isolamento:** cada tarefa delegada roda em um ramo ou worktree próprio do git, nunca direto no ramo principal.
+- **Conferência obrigatória:** ao voltar, o Claude roda os testes, compara o diff com o contrato e a regra 5, e só então marca a tarefa como pronta. Reprovou: devolve com o motivo, no máximo duas vezes; na terceira, o Claude assume a tarefa.
+- **Limites conhecidos:** o modo não interativo do `agy` decide permissões por política, sem perguntar; há relato de saída vazia quando chamado por script. O `/kit:setup` testa a chamada antes de habilitar a delegação. Não validado ainda na máquina do Breno.
+
 ### Como a regra é garantida
 
 - **Claude Code:** hooks bloqueiam (código sem requisito; implementação sem contrato citado na tarefa; interface sem simulado aprovado; fim de tarefa sem arquivo de teste alterado; fim de tarefa sem verificação).
