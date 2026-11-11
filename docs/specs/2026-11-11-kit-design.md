@@ -139,6 +139,28 @@ O bloqueio vale só para arquivos de código; documentação e configuração pa
 - **automacao:** arquétipos (coleta OPC UA, tela de supervisório, alteração de lógica, envio para banco). Verificação por checklist e revisão humana, porque não há teste automático em CLP. Regras fixas: controlador nunca exposto à internet, OPC UA só leitura por padrão, escrita em controlador só com confirmação.
 - **rotinas-casa:** sem cadeia. Uma skill geradora transforma uma rotina repetida em skill fixa com passos definidos, para rodar em modelo menor.
 
+## Componente opcional: privacidade (máscara de dados)
+
+Objetivo: dados sensíveis (IPs, hostnames, domínios internos, CPF, CNPJ, nomes, e-mails) não saem da máquina em texto claro; o Breno continua vendo os valores reais.
+
+Mecanismo: proxy local de terceiros entre o Claude Code e a API, que troca o dado por marcador estável na ida e restaura na volta. O kit não implementa o proxy; escolhe um, configura e verifica.
+
+- **Escopo:** só Claude Code no terminal (`ANTHROPIC_BASE_URL`). Não cobre o app do celular nem o claude.ai.
+- **Regras próprias do kit** em `pacotes/*/privacidade/`: CPF e CNPJ (com dígito verificador), faixas de IP privadas, hostnames e domínios internos listados pelo Breno em arquivo local fora do repositório.
+- **IPs preservam estrutura:** a troca é consistente por sub-rede (mesmo prefixo real vira mesmo prefixo falso), para o modelo continuar raciocinando sobre rede.
+- **Hook de garantia:** antes de enviar o prompt, um script local procura os padrões sensíveis; se o proxy não está ativo e há padrão, bloqueia e avisa.
+- **`/kit:setup`:** mostra se o proxy está ativo, em que porta, e se convive com o headroom (encadeamento a testar).
+- **Ferramenta escolhida: pii-airlock** (teste de 2026-11-11, versão 0.8.0, modo linha de comando, texto de exemplo em português).
+  - Sem configuração: mascarou IPs, nome e e-mail; deixou passar CPF, CNPJ, telefone brasileiro e hostname.
+  - Com quatro regras `custom_patterns` (CPF, CNPJ, telefone, hostname) e `deny_list`: mascarou tudo; ida e volta idêntica ao original.
+  - Precisa de `languages: [pt]` e do modelo `pt_core_news_lg`; o padrão é inglês e francês.
+  - Falso positivo observado: a palavra "CPF" foi marcada como nome de pessoa. Inofensivo, mas gera ruído.
+  - Faz uma consulta de rede a publicsuffix.org (lista pública de domínios) ao rodar; não envia o texto.
+  - **Não preserva sub-rede:** cada IP vira marcador independente, ou IP falso na mesma faixa 203.0.113.x para todos.
+  - Não testado ainda: modo proxy com o Claude Code real e convivência com o headroom.
+- **Alternativa avaliada: LLM-anonymization.** Já traz regex de CPF e CNPJ, mas depende de um modelo local via Ollama para a camada contextual e também gera IP aleatório. Só leitura de código, não executado.
+- **Pendência:** mapeamento de IP que preserva sub-rede não existe em nenhuma das duas. Primeira versão usa marcadores estáveis; mapeador próprio entra depois, se a perda de contexto de rede atrapalhar na prática.
+
 ## Economia de tokens
 
 Em ordem de impacto esperado: conversa nova por fase; modelo menor na execução; carga sob demanda dos checklists; headroom na saída de ferramentas; regra curta de resposta enxuta. O kit não promete percentual; `/kit:setup` mostra como medir com as estatísticas do headroom.
