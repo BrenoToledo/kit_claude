@@ -1,6 +1,6 @@
 # Especificação: kit de otimização do Claude Code
 
-Data: 2026-11-11. Nome provisório: `claude-kit`. Estado: aguardando aprovação da Entrega 1.
+Data: 2026-11-11. Repositório: `BrenoToledo/kit_claude`. Estado: aguardando aprovação da Entrega 1.
 
 ## Objetivo
 
@@ -113,8 +113,8 @@ Papéis: o Claude cuida de requisitos, desenho, contratos, plano e revisão. Tar
 Um repositório no GitHub que é ao mesmo tempo marketplace e plugin do Claude Code.
 
 ```
-/plugin marketplace add <usuario>/claude-kit
-/plugin install kit@claude-kit
+/plugin marketplace add BrenoToledo/kit_claude
+/plugin install kit@kit-claude
 /kit:setup
 ```
 
@@ -221,9 +221,11 @@ Fixo em todas: versão na URL, paginação, formato único de erro, limite de re
 
 O bloqueio vale só para arquivos de código; documentação e configuração passam.
 
+Os bloqueios de requisito e de simulado só atuam em projeto onde o `/kit:setup` já rodou (existe `.claude/kit-estado.json` com `ativo: true`). Fora disso o kit apenas sugere o setup no início da sessão. O bloqueio de segredos vale em qualquer projeto. Os scripts dos hooks são em Node.js, sem dependências, porque a máquina principal é Windows.
+
 ## Caminho rápido
 
-`/kit:rapido` desliga o bloqueio na sessão atual, para ajustes pequenos. Continua valendo o hook de segredos.
+`/kit:rapido` desliga o bloqueio de requisito e de simulado por 4 horas no projeto, para ajustes pequenos. Continua valendo o hook de segredos.
 
 ## Pacotes de domínio
 
