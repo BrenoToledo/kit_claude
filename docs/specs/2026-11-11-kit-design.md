@@ -1,6 +1,6 @@
 # Especificação: kit de otimização do Claude Code
 
-Data: 2026-11-11. Nome provisório: `claude-kit`. Estado: aguardando revisão do Breno.
+Data: 2026-11-11. Nome provisório: `claude-kit`. Estado: aguardando aprovação da Entrega 1.
 
 ## Objetivo
 
@@ -269,11 +269,30 @@ Em ordem de impacto esperado: conversa nova por fase; modelo menor na execução
 - Cada skill: um cenário sem a skill e o mesmo com a skill, em subagente de modelo menor, comparando se as perguntas certas aparecem.
 - Setup: rodar em pasta vazia, em projeto Django e em pasta com CLAUDE.md grande.
 
-## Ordem de construção
+## Divisão em entregas
 
-1. Esqueleto do plugin + `setup` + hook de início de sessão.
-2. `levantando-requisitos` com dois arquétipos de API + bloqueio.
-3. Padrão de API + `verificando-seguranca`.
-4. Restante da cadeia e `handoff`.
-5. Pacote `django-api`.
+### Entrega 1: o método funcionando
+
+Resultado: em um projeto novo, o Claude Code conduz do pedido até o plano seguindo as nove regras, com bloqueio.
+
+1. Esqueleto do plugin e do marketplace.
+2. `AGENTS.md` com as nove regras e modelos dos arquivos de `docs/projeto/`.
+3. `/kit:setup`: diagnóstico e correção do CLAUDE.md, skills, plugins e hooks. Sem privacidade e sem delegação.
+4. `levantando-requisitos` com os arquétipos de API e as três perguntas de segurança.
+5. `desenhando-solucao`: contratos, tabela de decisão de API e simulado visual.
+6. `planejando`: tarefas em arquivo, dependências, grupos paralelizáveis.
+7. Hooks: aviso de início de sessão, bloqueio sem requisito, bloqueio de interface sem simulado, bloqueio de segredos.
+8. `/kit:rapido`.
+
+Pronto quando: os testes dos hooks passam e um pedido de exemplo ("quero uma API de pedidos") gera `REQUISITOS.md`, `DESENHO.md`, contratos e tarefas sem intervenção além das respostas às perguntas.
+
+### Entrega 2: execução, verificação e extensões
+
+Cada item abaixo recebe sua própria revisão antes de ser construído.
+
+1. `executando` (teste primeiro), `verificando-seguranca`, `revisando`, `handoff`.
+2. Pacote `django-api`.
+3. Biblioteca de componentes e `publicando-componente`.
+4. Orquestração do Antigravity.
+5. Privacidade (pii-airlock com regras brasileiras).
 6. Pacotes `automacao` e `rotinas-casa`.
