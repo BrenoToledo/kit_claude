@@ -20,7 +20,7 @@ O problema principal é o levantamento de requisitos: o Claude não faz as pergu
 
 O kit padroniza o método, não a tecnologia. As regras valem para qualquer linguagem e qualquer agente.
 
-### As sete regras
+### As nove regras
 
 1. **Requisito antes de tudo.** Nenhum código sem `REQUISITOS.md` aprovado pelo Breno.
 2. **Contrato antes de implementação.** Toda fronteira entre partes (módulo, API, tela e back, CLP e banco) tem um arquivo de contrato: o que entra, o que sai, erros e um exemplo. Implementação só começa com o contrato escrito.
@@ -29,6 +29,31 @@ O kit padroniza o método, não a tecnologia. As regras valem para qualquer ling
 5. **O mais simples que atende.** Antes de escrever: já existe no projeto? a biblioteca padrão resolve? uma dependência já instalada resolve? Só então código novo, o mínimo.
 6. **Tarefa pequena, em arquivo próprio.** Uma tarefa, um arquivo, um critério de pronto verificável.
 7. **Verificar antes de dizer pronto.** Segurança e revisão contra o desenho; resultado gravado.
+8. **Tela aprovada antes de tela codada.** Todo trabalho visual começa por um simulado (protótipo no Figma, página estática ou imagem) aprovado pelo Breno. Sem simulado aprovado, nenhuma tarefa de interface começa.
+9. **Reaproveitar antes de criar, e criar para reaproveitar.** Antes de fazer uma peça, consultar a biblioteca. Peça nova que serve a mais de um lugar (botão, campo, tabela, cliente de API, função utilitária) nasce isolada, sem depender do projeto, e é proposta para a biblioteca.
+
+### Simulado visual
+
+- Feito na etapa de desenho, depois dos requisitos e antes do plano.
+- Formato, em ordem de preferência: protótipo no Figma (quando o conector está disponível); página HTML estática sem lógica; imagem.
+- Fica em `docs/projeto/telas/`, com a lista dos componentes que a tela usa, marcando quais já existem na biblioteca e quais são novos.
+- A aprovação é registrada em `ESTADO.md`; o hook de interface confere esse registro.
+
+### Biblioteca de componentes
+
+Um repositório separado no GitHub, do Breno, com o que já foi feito e pode ser usado de novo.
+
+```
+biblioteca/
+  CATALOGO.md              uma linha por componente: nome, para que serve, onde está
+  componentes/<nome>/
+    LEIAME.md              uso, parâmetros, exemplo
+    código + teste
+```
+
+- **Consulta:** desenho e plano leem só o `CATALOGO.md`; o componente inteiro é aberto apenas pela tarefa que vai usá-lo.
+- **Publicação:** ao terminar uma tarefa que criou peça reutilizável, a skill `publicando-componente` isola a peça, escreve o `LEIAME.md`, confere que não há dado ou nome de cliente e abre um pedido de inclusão (pull request). O Breno aprova; nada sobe sozinho.
+- **Origem do código:** peça criada em projeto de empregador ou cliente só vai para a biblioteca pessoal se o Breno confirmar que pode. A skill pergunta sempre que o projeto de origem não é pessoal.
 
 ### Estado do projeto em Markdown
 
@@ -43,6 +68,7 @@ docs/projeto/
   PLANO.md             tarefas em ordem, dependências, grupos que podem paralelizar
   tarefas/NNN-nome.md  objetivo, contratos que usa, depende_de, critério de pronto,
                        status (pendente | em andamento | pronta), responsável
+  telas/               simulados aprovados e lista de componentes por tela
   DECISOES.md          decisões e o motivo, uma linha cada
 ```
 
@@ -69,8 +95,8 @@ Quem executa uma tarefa não lê requisitos nem outras tarefas. É isso que mant
 
 ### Como a regra é garantida
 
-- **Claude Code:** hooks bloqueiam (código sem requisito; implementação sem contrato citado na tarefa; fim de tarefa sem arquivo de teste alterado; fim de tarefa sem verificação).
-- **Outros agentes:** um `AGENTS.md` na raiz com as sete regras e o mapa de arquivos. Nesses a regra é instrução, sem bloqueio; a revisão final pega os desvios.
+- **Claude Code:** hooks bloqueiam (código sem requisito; implementação sem contrato citado na tarefa; interface sem simulado aprovado; fim de tarefa sem arquivo de teste alterado; fim de tarefa sem verificação).
+- **Outros agentes:** um `AGENTS.md` na raiz com as nove regras e o mapa de arquivos. Nesses a regra é instrução, sem bloqueio; a revisão final pega os desvios.
 
 ## Distribuição
 
