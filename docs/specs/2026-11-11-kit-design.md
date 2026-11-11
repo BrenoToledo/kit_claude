@@ -16,6 +16,62 @@ O problema principal é o levantamento de requisitos: o Claude não faz as pergu
 4. Cada fase começa em conversa nova lendo um único arquivo de handoff.
 5. Instalação em uma máquina nova: dois comandos e um `/kit:setup`.
 
+## Metodologia (o centro do kit)
+
+O kit padroniza o método, não a tecnologia. As regras valem para qualquer linguagem e qualquer agente.
+
+### As sete regras
+
+1. **Requisito antes de tudo.** Nenhum código sem `REQUISITOS.md` aprovado pelo Breno.
+2. **Contrato antes de implementação.** Toda fronteira entre partes (módulo, API, tela e back, CLP e banco) tem um arquivo de contrato: o que entra, o que sai, erros e um exemplo. Implementação só começa com o contrato escrito.
+3. **Série por padrão.** As tarefas rodam uma após a outra. Duas tarefas só rodam em paralelo se toda ligação entre elas passa por um contrato já congelado. Sem contrato, é série.
+4. **Teste primeiro.** O teste nasce do contrato, falha, e só então vem o código. Tarefa sem teste que falhou e depois passou não está pronta.
+5. **O mais simples que atende.** Antes de escrever: já existe no projeto? a biblioteca padrão resolve? uma dependência já instalada resolve? Só então código novo, o mínimo.
+6. **Tarefa pequena, em arquivo próprio.** Uma tarefa, um arquivo, um critério de pronto verificável.
+7. **Verificar antes de dizer pronto.** Segurança e revisão contra o desenho; resultado gravado.
+
+### Estado do projeto em Markdown
+
+Tudo que orienta o trabalho fica em arquivos no repositório do projeto, legíveis por qualquer IA ou pessoa.
+
+```
+docs/projeto/
+  ESTADO.md            fase atual, última ação, próxima ação. Único arquivo lido ao começar.
+  REQUISITOS.md
+  DESENHO.md
+  contratos/<nome>.md  entradas, saídas, erros, exemplo, status (rascunho | congelado)
+  PLANO.md             tarefas em ordem, dependências, grupos que podem paralelizar
+  tarefas/NNN-nome.md  objetivo, contratos que usa, depende_de, critério de pronto,
+                       status (pendente | em andamento | pronta), responsável
+  DECISOES.md          decisões e o motivo, uma linha cada
+```
+
+### Carga progressiva de contexto
+
+Cada etapa lê só o que precisa:
+
+| Etapa | Lê |
+|---|---|
+| Início de qualquer sessão | `ESTADO.md` |
+| Desenho | `REQUISITOS.md` |
+| Plano | `DESENHO.md` + contratos |
+| Execução de uma tarefa | o arquivo da tarefa + os contratos que ela cita |
+| Revisão | diff + contratos + `DESENHO.md` |
+
+Quem executa uma tarefa não lê requisitos nem outras tarefas. É isso que mantém o contexto pequeno e permite modelo menor.
+
+### Trabalho em paralelo por várias IAs
+
+- Uma IA assume a tarefa escrevendo seu nome em `responsável`, mudando o status e fazendo commit. O commit é a trava.
+- Só pega tarefa cujo `depende_de` está todo pronto e cujos contratos estão congelados.
+- Mudança em contrato congelado não é feita pela tarefa: volta para o desenho, e as tarefas que usam aquele contrato são reabertas.
+- Ao terminar, atualiza a tarefa e `ESTADO.md`.
+
+### Como a regra é garantida
+
+- **Claude Code:** hooks bloqueiam (código sem requisito; implementação sem contrato citado na tarefa; fim de tarefa sem arquivo de teste alterado; fim de tarefa sem verificação).
+- **Outros agentes:** um `AGENTS.md` na raiz com as sete regras e o mapa de arquivos. Nesses a regra é instrução, sem bloqueio; a revisão final pega os desvios.
+
 ## Distribuição
 
 Um repositório no GitHub que é ao mesmo tempo marketplace e plugin do Claude Code.
@@ -86,12 +142,12 @@ Cada skill faz uma coisa, grava um arquivo e termina com a linha "Próxima etapa
 | Skill | Lê | Grava | Modelo sugerido |
 |---|---|---|---|
 | levantando-requisitos | pedido do usuário | `REQUISITOS.md` | forte |
-| desenhando-solucao | `REQUISITOS.md` | `DESENHO.md` | forte |
-| planejando | `DESENHO.md` | `PLANO.md` (tarefas pequenas) | médio |
-| executando | uma tarefa do `PLANO.md` | código + marca a tarefa | menor, em subagente |
+| desenhando-solucao | `REQUISITOS.md` | `DESENHO.md` + `contratos/` | forte |
+| planejando | `DESENHO.md` + contratos | `PLANO.md` + `tarefas/` | médio |
+| executando | uma tarefa + contratos citados | teste, código, status da tarefa | menor, em subagente |
 | verificando-seguranca | diff + `REQUISITOS.md` | `SEGURANCA.md` | médio |
 | revisando | diff + `DESENHO.md` | achados | médio |
-| handoff | estado atual | `HANDOFF.md` | menor |
+| handoff | estado atual | `ESTADO.md` | menor |
 
 ### levantando-requisitos
 
@@ -168,7 +224,7 @@ Em ordem de impacto esperado: conversa nova por fase; modelo menor na execução
 ## Fora de escopo nesta versão
 
 - Reescrever superpowers, headroom, caveman ou ponytail. O kit detecta e convive.
-- Suporte a outros agentes (Codex, Cursor).
+- Hooks e plugin para outros agentes (Codex, Cursor). Eles seguem os mesmos arquivos Markdown e o `AGENTS.md`, sem bloqueio automático.
 - Integração com Figma na etapa de design; fica como pergunta no levantamento.
 
 ## Testes
