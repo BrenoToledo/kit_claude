@@ -298,3 +298,7 @@ Cada item abaixo recebe sua própria revisão antes de ser construído.
 4. Orquestração do Antigravity.
 5. Privacidade (pii-airlock com regras brasileiras).
 6. Pacotes `automacao` e `rotinas-casa`.
+7. Candidato a validar antes de adotar: TypeSafe (classificador por API) como peça opcional.
+   - Usos possíveis: escolher o executor de cada tarefa (`claude`, `claude-menor`, `agy`) e revisão semântica das nove regras e dos contratos na etapa `revisando` ou em CI.
+   - Fora de questão: uso em hooks (hook não usa rede), detecção de dado sensível (o dado sairia da máquina) e classificação de arquétipo (a skill já faz).
+   - Antes de adotar: medir latência e acerto em tarefas reais, conhecer o preço e a política de retenção de dados. A documentação consultada em 2026-11-11 não informa preço nem retenção.
