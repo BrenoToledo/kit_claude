@@ -28,7 +28,7 @@ export function criarProjeto(opcoes = {}) {
 }
 
 export function rodarHook(arquivo, entrada, args = [], opcoes = {}) {
-  const r = spawnSync('node', [join(HOOKS, arquivo), ...args], {
+  const r = spawnSync(process.execPath, [join(HOOKS, arquivo), ...args], {
     input: typeof entrada === 'string' ? entrada : JSON.stringify(entrada),
     encoding: 'utf8',
     ...opcoes,
