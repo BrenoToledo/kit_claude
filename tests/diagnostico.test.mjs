@@ -12,7 +12,7 @@ const diag = (raiz, home, env = {}) => {
   return JSON.parse(r.stdout);
 };
 const CHAVES = ['claudeMdGlobal', 'claudeMdProjeto', 'agentsMd', 'skillsGlobais', 'plugins', 'hooksUsuario',
-  'ferramentas', 'proxy', 'tipoProjeto', 'kitAtivo', 'estadoProjeto'];
+  'ferramentas', 'proxy', 'tipoProjeto', 'kitAtivo', 'estadoProjeto', 'runBat'];
 
 test('pasta vazia', () => {
   const d = diag(pasta(), pasta());

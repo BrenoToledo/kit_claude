@@ -119,6 +119,13 @@ Papéis: o Claude cuida de requisitos, desenho, contratos, plano e revisão. Tar
 - Referência em Python (`kit_log.py`), só com a biblioteca padrão.
 - Limite: o padrão garante a informação, não a reprodução automática; falha que depende de serviço externo ou de concorrência pode exigir mais do que o log.
 
+### Padrão de execução (acrescentado em 2026-11-11)
+
+- `run.bat` igual em todo projeto, na raiz, mais `run.config` com uma linha por serviço (`nome | porta | comando`).
+- Comandos: sem argumento sobe tudo; `stop`, `status`, `restart`, `logs <nome>`.
+- Instância antiga é encerrada pelo PID gravado em `.run\`, conferindo a hora de início. Porta ocupada por processo de fora não é encerrada sem `--forcar`.
+- Só Windows. Não testado em Windows no momento da entrega; os testes automáticos conferem apenas formato e documentação.
+
 ## Distribuição
 
 Um repositório no GitHub que é ao mesmo tempo marketplace e plugin do Claude Code.

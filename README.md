@@ -79,6 +79,10 @@ node plugins/kit/hooks/extrair-falha.mjs app.jsonl <id_correlacao>
 
 Há uma implementação de referência em Python em `plugins/kit/modelos/log/python/kit_log.py`.
 
+## Padrão de execução
+
+Todo projeto que tem algo para rodar traz `run.bat` e `run.config` na raiz (copiados pelo `/kit:setup`). `run.bat` encerra as instâncias antigas e sobe os serviços; `run.bat stop`, `status`, `restart` e `logs <nome>` completam. Regras em `docs/padroes/RUN.md`. Só Windows.
+
 ## Arquivos do projeto
 
 ```

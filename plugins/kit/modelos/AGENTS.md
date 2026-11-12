@@ -51,6 +51,10 @@ Leia só o que a etapa pede. Contexto pequeno é parte do método.
 - Ao terminar a implementação: `status: em-revisao` e commit. A tarefa só vira `pronta` depois da verificação de segurança (`seguranca: ok`) e da revisão contra o contrato.
 - Ao marcar `pronta`: atualize `ESTADO.md` e faça commit.
 
+## Como rodar o projeto
+
+Use sempre `run.bat` na raiz: ele encerra as instâncias antigas e sobe os serviços listados em `run.config`. `run.bat status` mostra o que está rodando; `run.bat stop` encerra. Detalhes em `docs/padroes/RUN.md`.
+
 ## Segredos
 
 Senha, token e chave ficam em variável de ambiente, nunca em arquivo versionado.

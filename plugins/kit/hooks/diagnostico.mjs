@@ -78,6 +78,7 @@ const resultado = {
   tipoProjeto: tipoProjeto(),
   kitAtivo: projetoAtivo(raiz),
   estadoProjeto: existsSync(join(raiz, 'docs', 'projeto', 'ESTADO.md')),
+  runBat: existsSync(join(raiz, 'run.bat')),
 };
 
 console.log(JSON.stringify(resultado, null, 2));
