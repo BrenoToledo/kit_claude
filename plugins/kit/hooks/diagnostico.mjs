@@ -73,12 +73,15 @@ const resultado = {
   skillsGlobais: listar(join(home, '.claude', 'skills')).filter((d) => d.isDirectory()).map((d) => d.name).sort(),
   plugins: plugins(),
   hooksUsuario: ajustes.hooks && typeof ajustes.hooks === 'object' ? Object.keys(ajustes.hooks) : [],
-  ferramentas: { headroom: noPath('headroom'), rtk: noPath('rtk'), agy: noPath('agy') },
+  ferramentas: { headroom: noPath('headroom'), rtk: noPath('rtk'), agy: noPath('agy'), gh: noPath('gh') },
   proxy: process.env.ANTHROPIC_BASE_URL ?? ajustes.env?.ANTHROPIC_BASE_URL ?? null,
   tipoProjeto: tipoProjeto(),
   kitAtivo: projetoAtivo(raiz),
   estadoProjeto: existsSync(join(raiz, 'docs', 'projeto', 'ESTADO.md')),
   runBat: existsSync(join(raiz, 'run.bat')),
+  testBat: existsSync(join(raiz, 'test.bat')),
+  envExample: existsSync(join(raiz, '.env.example')),
+  padroes: existsSync(join(raiz, 'docs', 'padroes')),
 };
 
 console.log(JSON.stringify(resultado, null, 2));

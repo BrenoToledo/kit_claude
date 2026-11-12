@@ -51,9 +51,24 @@ Leia só o que a etapa pede. Contexto pequeno é parte do método.
 - Ao terminar a implementação: `status: em-revisao` e commit. A tarefa só vira `pronta` depois da verificação de segurança (`seguranca: ok`) e da revisão contra o contrato.
 - Ao marcar `pronta`: atualize `ESTADO.md` e faça commit.
 
-## Como rodar o projeto
+## Padrões
 
-Use sempre `run.bat` na raiz: ele encerra as instâncias antigas e sobe os serviços listados em `run.config`. `run.bat status` mostra o que está rodando; `run.bat stop` encerra. Detalhes em `docs/padroes/RUN.md`.
+Ficam em `docs/padroes/` e valem para qualquer linguagem. Leia só o que a tarefa pede.
+
+| Arquivo | Assunto |
+|---|---|
+| `LOG.md` | Formato de log e o que registrar em erro |
+| `RUN.md` | Como rodar o projeto (`run.bat`) |
+| `TESTE.md` | Comando único de teste (`test.bat`) |
+| `CONFIG.md` | Variáveis de ambiente e `.env.example` |
+| `SAUDE.md` | Verificação de saúde do serviço |
+| `QUALIDADE.md` | Lint, formatação e análise estática (SonarQube) |
+| `CONTAINER.md` | Regras da imagem de contêiner |
+| `CI-CD.md` | Integração e entrega contínuas |
+
+## Como rodar e testar o projeto
+
+Use sempre `run.bat` na raiz: ele encerra as instâncias antigas e sobe os serviços listados em `run.config`. `run.bat status` mostra o que está rodando; `run.bat stop` encerra. Detalhes em `docs/padroes/RUN.md`. Para testar, use sempre `test.bat`.
 
 ## Segredos
 

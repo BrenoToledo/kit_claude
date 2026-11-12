@@ -126,6 +126,14 @@ Papéis: o Claude cuida de requisitos, desenho, contratos, plano e revisão. Tar
 - Instância antiga é encerrada pelo PID gravado em `.run\`, conferindo a hora de início. Porta ocupada por processo de fora não é encerrada sem `--forcar`.
 - Só Windows. Não testado em Windows no momento da entrega; os testes automáticos conferem apenas formato e documentação.
 
+### Padrões, medição e aprendizado (acrescentados em 2026-11-11)
+
+- **Padrões em arquivo, independentes de linguagem,** em `docs/padroes/`: `LOG`, `RUN`, `TESTE` (`test.bat` e `test.config`), `CONFIG` (`.env.example`), `SAUDE` (`/saude`), `QUALIDADE` (lint, formatação, SonarQube), `CONTAINER`, `CI-CD`.
+- **Levantamento** ganhou perguntas fixas de qualidade e entrega: lint, análise estática, contêiner, CI, CD e ambientes.
+- **Medição:** os hooks registram data e tipo de cada bloqueio em `.claude/kit-eventos.jsonl`; `medir.mjs` resume.
+- **Aprendizado:** a skill `registrando-aprendizado` grava o relato no projeto e, com confirmação do Breno, abre PR no `kit_claude` acrescentando um arquivo em `aprendizados/`. O PR nunca altera skill ou hook.
+- **Não feito:** `run.bat status` consultando `/saude`; pacote `django-api`.
+
 ## Distribuição
 
 Um repositório no GitHub que é ao mesmo tempo marketplace e plugin do Claude Code.

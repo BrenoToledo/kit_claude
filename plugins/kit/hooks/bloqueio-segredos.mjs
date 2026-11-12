@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { lerEntrada, acharRaiz } from './lib/projeto.mjs';
+import { lerEntrada, acharRaiz, registrarEvento } from './lib/projeto.mjs';
 
 const ENV_MODELOS = ['.env.example', '.env.sample', '.env.modelo', '.env.template'];
 const EXT_SECRETAS = ['.pem', '.pfx', '.p12'];
@@ -81,8 +81,10 @@ export function decidir(entrada) {
 const chamadoDireto = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
 if (chamadoDireto) {
   try {
-    const motivo = decidir(await lerEntrada());
+    const entrada = await lerEntrada();
+    const motivo = decidir(entrada);
     if (motivo) {
+      registrarEvento(acharRaiz(entrada?.cwd), 'bloqueio_segredo');
       process.stderr.write(`Bloqueado pelo kit: possível segredo (${motivo}). Guarde o valor em variável de ambiente.\n`);
       process.exitCode = 2;
     }

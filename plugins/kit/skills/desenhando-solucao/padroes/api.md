@@ -21,6 +21,8 @@ Mais de um consumidor: uma linha para cada, com endpoints separados.
 - Limite de requisições por cliente.
 - Segredos em variável de ambiente.
 - Entrada validada na borda; o que não está no contrato é recusado.
+- Verificação de saúde em `/saude` (ver `docs/padroes/SAUDE.md`).
+- Log no padrão de `docs/padroes/LOG.md`, com `id_correlacao` recebido ou criado em cada requisição.
 
 ## Formato de erro
 

@@ -17,6 +17,8 @@ Nesta etapa se produz desenho e documentos. A implementação começa depois do 
 
 3. **Escreva um contrato para cada ligação entre partes**, a partir de `modelos/projeto/contrato.md` (em `<diretório base desta skill>/../../modelos/`), em `docs/projeto/contratos/<nome>.md`, com `status: rascunho`. Preencha todas as seções, com um exemplo real de entrada e saída e os eventos de log que a parte emite.
 
+   Lint, análise estática, contêiner e CI/CD seguem as respostas de `Qualidade e entrega` nos requisitos e os padrões em `docs/padroes/`; registre as ferramentas escolhidas em `DECISOES.md`.
+
 4. **Se há API**, abra `padroes/api.md`, escolha o modelo pela tabela e registre a linha escolhida em `DECISOES.md`.
 
 5. **Se há tela**, faça o simulado antes de qualquer outra coisa visual:

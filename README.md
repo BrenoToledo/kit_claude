@@ -46,6 +46,7 @@ O texto completo vai para o `AGENTS.md` do seu projeto.
 | `/kit:verificando-seguranca` | Confere o diff da tarefa contra o checklist de segurança |
 | `/kit:revisando` | Confere a tarefa contra o contrato e marca como pronta |
 | `/kit:reproduzindo-falha` | Do log ao teste que falha, e só então à correção |
+| `/kit:registrando-aprendizado` | Relata um problema crítico e propõe melhoria ao kit por PR |
 | `/kit:handoff` | Grava o estado para retomar em outra conversa ou por outra IA |
 | `/kit:rapido` | Libera os bloqueios de requisito e de simulado por 4 horas para um ajuste pequeno |
 
@@ -67,6 +68,22 @@ Só no Claude Code e no Cowork; no chat as skills funcionam, mas nada é bloquea
 | Início de sessão | Fase atual e próxima ação, em três linhas |
 
 Projeto ativo é aquele em que o `/kit:setup` rodou. Documentação e configuração (`docs/`, `.md`, `.json`, `.yaml` e afins) nunca são bloqueadas. Se um hook falhar por erro interno, ele libera.
+
+## Padrões para todo projeto
+
+O `/kit:setup` copia para `docs/padroes/` oito arquivos de boas práticas, independentes de linguagem: `LOG.md`, `RUN.md`, `TESTE.md`, `CONFIG.md`, `SAUDE.md`, `QUALIDADE.md` (lint e SonarQube), `CONTAINER.md` e `CI-CD.md`. O levantamento de requisitos pergunta sobre lint, análise estática, contêiner e CI/CD; o desenho segue esses arquivos.
+
+## Aprendizado
+
+Quando uma etapa encontra algo crítico, a skill `/kit:registrando-aprendizado` grava o relato no projeto e, com a sua confirmação, abre um pedido de mesclagem neste repositório, em `aprendizados/`. Precisa do `gh` instalado e autenticado.
+
+## Medição
+
+```
+node plugins/kit/hooks/medir.mjs
+```
+
+Mostra quantos bloqueios cada hook fez, quantas vezes o modo rápido foi usado e a situação das tarefas. Os eventos ficam em `.claude/kit-eventos.jsonl` (só data e tipo).
 
 ## Padrão de log
 

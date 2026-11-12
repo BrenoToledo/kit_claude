@@ -16,7 +16,7 @@ description: Use quando uma tarefa está em em-revisao com seguranca ok, para co
    git diff <último hash da lista>
    ```
 
-2. **Rode o teste da tarefa e a suíte inteira** agora. Leia a saída. Um resultado anotado em `Notas` não substitui rodar.
+2. **Rode o teste da tarefa e a suíte inteira** agora (`test.bat`, com lint incluído). Leia a saída. Um resultado anotado em `Notas` não substitui rodar.
 
 3. **Confira, item por item:**
    - **Contrato:** entrada, saída e erros implementados como escritos, incluindo o exemplo.
@@ -31,6 +31,8 @@ description: Use quando uma tarefa está em em-revisao com seguranca ok, para co
 4. **Classifique cada achado:**
    - **bloqueia:** contrato descumprido, teste que não prova, falha de segurança;
    - **anotar:** melhoria que não muda o comportamento combinado.
+
+   Achado crítico (bug confirmado, falha de segurança, lacuna do método): rode `/kit:registrando-aprendizado`.
 
 5. **Se há achado que bloqueia:** grave os achados em `## Revisão` na tarefa, volte para `status: em-andamento` e indique `/kit:executando` (passos 5 a 8). A tarefa repete verificação e revisão depois.
 

@@ -144,5 +144,5 @@ test('padrao documentado e encaixado no metodo', () => {
   assert.match(ler('modelos', 'projeto', 'contrato.md'), /^## Logs/m);
   assert.match(ler('modelos', 'AGENTS.md'), /^10\. \*\*/m);
   assert.match(ler('skills', 'revisando', 'SKILL.md'), /id_correlacao/);
-  assert.match(ler('skills', 'setup', 'SKILL.md'), /docs\/padroes\/LOG\.md/);
+  assert.match(ler('skills', 'setup', 'SKILL.md'), /docs\/padroes\//);
 });

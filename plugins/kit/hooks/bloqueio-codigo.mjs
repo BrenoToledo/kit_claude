@@ -3,7 +3,7 @@
 // sem simulado aprovado não se escreve interface. Qualquer erro interno libera.
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { lerEntrada, acharRaiz, projetoAtivo, lerEstado, modoRapido, classificar } from './lib/projeto.mjs';
+import { lerEntrada, acharRaiz, projetoAtivo, lerEstado, modoRapido, classificar, registrarEvento } from './lib/projeto.mjs';
 
 function decidir(entrada) {
   const caminho = entrada?.tool_input?.file_path ?? entrada?.tool_input?.notebook_path;
@@ -15,9 +15,11 @@ function decidir(entrada) {
   if (tipo === 'livre') return null;
   const estado = lerEstado(raiz);
   if (!existsSync(join(raiz, 'docs', 'projeto', 'REQUISITOS.md')) || estado.requisitos !== 'aprovado') {
+    registrarEvento(raiz, 'bloqueio_requisito');
     return 'Bloqueado pelo kit: não há requisitos aprovados. Rode /kit:levantando-requisitos ou, para um ajuste pequeno, /kit:rapido.';
   }
   if (tipo === 'interface' && estado.simulado !== 'aprovado' && estado.simulado !== 'nao-se-aplica') {
+    registrarEvento(raiz, 'bloqueio_simulado');
     return 'Bloqueado pelo kit: tela sem simulado aprovado. Rode /kit:desenhando-solucao.';
   }
   return null;

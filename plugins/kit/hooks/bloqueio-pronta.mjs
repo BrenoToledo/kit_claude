@@ -4,7 +4,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { lerEntrada, acharRaiz, projetoAtivo, lerCabecalho } from './lib/projeto.mjs';
+import { lerEntrada, acharRaiz, projetoAtivo, lerCabecalho, registrarEvento } from './lib/projeto.mjs';
 
 const TAREFA = /^docs\/projeto\/tarefas\/[^/]+\.md$/;
 const PASTA_TESTE = /(^|\/)(tests?|__tests__|specs?)\//i;
@@ -75,8 +75,10 @@ function decidir(entrada) {
 }
 
 try {
-  const motivo = decidir(await lerEntrada());
+  const entrada = await lerEntrada();
+  const motivo = decidir(entrada);
   if (motivo) {
+    registrarEvento(acharRaiz(entrada?.cwd), 'bloqueio_pronta');
     process.stderr.write(motivo + '\n');
     process.exitCode = 2;
   }

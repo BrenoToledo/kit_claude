@@ -1,5 +1,5 @@
 // Funções comuns aos hooks do kit. Sem dependências; só leitura, exceto ligar/desligarRapido.
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, appendFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 
 const LIVRE_PASTAS = ['docs/', '.claude/', '.github/'];
@@ -100,4 +100,15 @@ export function classificar(caminho, raiz) {
   if (LIVRE_PASTAS.some((p) => rel.startsWith(p)) || LIVRE_EXT.includes(ext)) return 'livre';
   if (INTERFACE_EXT.includes(ext) || /(^|\/)(templates|static)\//.test(rel)) return 'interface';
   return 'codigo';
+}
+
+// Registra um evento do kit em .claude/kit-eventos.jsonl, só em projeto ativo.
+// Guarda apenas a data e o tipo: nunca conteúdo de arquivo. Falha em silêncio.
+export function registrarEvento(raiz, tipo) {
+  try {
+    if (!raiz || !projetoAtivo(raiz)) return;
+    appendFileSync(join(raiz, '.claude', 'kit-eventos.jsonl'), JSON.stringify({ ts: new Date().toISOString(), tipo }) + '\n');
+  } catch {
+    // medição nunca pode atrapalhar o trabalho
+  }
 }

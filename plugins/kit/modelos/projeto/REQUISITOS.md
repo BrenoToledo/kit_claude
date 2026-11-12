@@ -18,6 +18,15 @@
 - Dado sensível:
 - Exposição: internet | rede interna | rede de automação
 
+## Qualidade e entrega
+
+- Lint e formatação:
+- Análise estática (SonarQube):
+- Contêiner:
+- Integração contínua (CI):
+- Entrega contínua (CD):
+- Ambientes:
+
 ## Ordem de construção
 
 (contrato primeiro | design primeiro | back primeiro, com o motivo em uma linha)

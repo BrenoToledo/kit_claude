@@ -1,0 +1,19 @@
+# Modelo do kit: copie para .github/workflows/testes.yml no projeto.
+# Roda, na ordem, os comandos do test.config. Ver docs/padroes/CI-CD.md.
+name: testes
+on:
+  push:
+  pull_request:
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Acrescente aqui a instalação da linguagem e das dependências do projeto.
+      - name: Comandos do test.config
+        run: |
+          set -e
+          grep -v '^[[:space:]]*#' test.config | grep -v '^[[:space:]]*$' | tr -d '\r' | while IFS= read -r comando; do
+            echo "> $comando"
+            bash -c "$comando"
+          done

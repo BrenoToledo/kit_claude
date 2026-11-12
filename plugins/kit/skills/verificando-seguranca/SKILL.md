@@ -34,7 +34,7 @@ Confere o que a tarefa mudou contra um checklist fixo. O resultado fica no próp
 
 6. **Feche o resultado:**
    - sem achado em aberto: `seguranca: ok` no cabeçalho;
-   - com achado: `seguranca: pendente`, volte a tarefa para `em-andamento` e corrija com teste primeiro (`/kit:executando`, passos 5 a 8). Depois repita esta verificação.
+   - com achado: rode `/kit:registrando-aprendizado`; depois `seguranca: pendente`, volte a tarefa para `em-andamento` e corrija com teste primeiro (`/kit:executando`, passos 5 a 8). Depois repita esta verificação.
 
 ## Conferência
 

@@ -31,16 +31,18 @@ Nesta etapa só se pergunta e se registra. Tecnologia, arquitetura e código per
    - Que dado é sensível?
    - Onde fica exposto: internet, rede interna ou rede de automação?
 
-5. **Pergunte se há tela.** Sem tela, o simulado não se aplica.
+5. **Faça as perguntas de qualidade e entrega** de `perguntas-qualidade.md`: lint, análise estática, contêiner, CI/CD e ambientes.
 
-6. **Escolha a ordem de construção** e diga o motivo em uma linha:
+6. **Pergunte se há tela.** Sem tela, o simulado não se aplica.
+
+7. **Escolha a ordem de construção** e diga o motivo em uma linha:
    - contrato primeiro, quando front e back são partes separadas;
    - design primeiro, quando a tela é o produto;
    - back primeiro, quando é fluxo de dados sem tela.
 
-7. **Grave `docs/projeto/REQUISITOS.md`** com todas as seções do modelo, incluindo o que ficou fora de escopo. Mostre um resumo curto e peça aprovação explícita.
+8. **Grave `docs/projeto/REQUISITOS.md`** com todas as seções do modelo, incluindo o que ficou fora de escopo. Mostre um resumo curto e peça aprovação explícita.
 
-8. **Com o sim do usuário**, atualize `ESTADO.md`: `requisitos: aprovado`, `fase: desenho`, `simulado: nao-se-aplica` se não há tela, `proxima: rode /kit:desenhando-solucao`. Registre a data em `Aprovação`. Sem o sim, o estado continua `pendente` e você ajusta o que ele pedir.
+9. **Com o sim do usuário**, atualize `ESTADO.md`: `requisitos: aprovado`, `fase: desenho`, `simulado: nao-se-aplica` se não há tela, `proxima: rode /kit:desenhando-solucao`. Registre a data em `Aprovação`. Sem o sim, o estado continua `pendente` e você ajusta o que ele pedir.
 
 ## Sinais de que a etapa saiu do trilho
 

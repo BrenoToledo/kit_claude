@@ -35,7 +35,9 @@ Parte do log, chega a um teste que falha do mesmo jeito e só então corrige. Se
 
 7. **Preencha no arquivo da falha** `## Teste que reproduz` (caminho do teste) e `## Causa e correção` (o que era, o que mudou).
 
-8. **Se a correção exige mudar um contrato**, pare: registre em `ESTADO.md` e volte ao desenho.
+8. **Registre o aprendizado** com `/kit:registrando-aprendizado`: o que o método deixou passar e como pegar antes.
+
+9. **Se a correção exige mudar um contrato**, pare: registre em `ESTADO.md` e volte ao desenho.
 
 ## Quando não há log no padrão
 
