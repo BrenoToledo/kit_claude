@@ -41,7 +41,13 @@ O texto completo vai para o `AGENTS.md` do seu projeto.
 | `/kit:levantando-requisitos` | Classifica o pedido, faz as perguntas do arquétipo e grava `REQUISITOS.md` |
 | `/kit:desenhando-solucao` | Partes, contratos, padrão de API e simulado de tela |
 | `/kit:planejando` | Tarefas em arquivo, dependências e grupos paralelos |
-| `/kit:rapido` | Libera os bloqueios por 4 horas para um ajuste pequeno |
+| `/kit:executando` | Implementa uma tarefa, com teste primeiro |
+| `/kit:verificando-seguranca` | Confere o diff da tarefa contra o checklist de segurança |
+| `/kit:revisando` | Confere a tarefa contra o contrato e marca como pronta |
+| `/kit:handoff` | Grava o estado para retomar em outra conversa ou por outra IA |
+| `/kit:rapido` | Libera os bloqueios de requisito e de simulado por 4 horas para um ajuste pequeno |
+
+Tarefas marcadas com `executor: claude-menor` vão para o agente `kit:executor`, que roda em modelo menor (definido em `plugins/kit/agents/executor.md`, campo `model`).
 
 Cada etapa termina dizendo qual é a próxima e qual arquivo ela lê. Comece cada etapa em conversa nova: o contexto fica pequeno e o consumo cai.
 
@@ -53,6 +59,7 @@ Só no Claude Code e no Cowork; no chat as skills funcionam, mas nada é bloquea
 |---|---|
 | Projeto ativo, código sem `REQUISITOS.md` aprovado | Escrita bloqueada |
 | Projeto ativo, arquivo de interface sem simulado aprovado | Escrita bloqueada |
+| Projeto ativo, tarefa marcada `pronta` sem teste alterado ou sem `seguranca: ok` | Escrita bloqueada |
 | Qualquer projeto: `.env`, chave privada, senha ou token literal | Escrita bloqueada |
 | Qualquer projeto: `git add`/`commit` levando `.env` | Comando bloqueado |
 | Início de sessão | Fase atual e próxima ação, em três linhas |
@@ -73,6 +80,6 @@ docs/projeto/
 node --test
 ```
 
-## Ainda não incluído (Entrega 2)
+## Ainda não incluído
 
-Execução com teste primeiro, verificação de segurança, revisão, handoff, pacotes de domínio (Django, automação, rotinas de casa), biblioteca de componentes, orquestração do Antigravity e máscara de dados sensíveis. A especificação está em `docs/specs/`.
+Pacotes de domínio (Django, automação, rotinas de casa), biblioteca de componentes, orquestração do Antigravity e máscara de dados sensíveis. A especificação está em `docs/specs/`.

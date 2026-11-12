@@ -44,21 +44,24 @@ export function projetoAtivo(raiz) {
   }
 }
 
+// Lê as linhas `chave: valor` do cabeçalho entre o primeiro par de `---`. Tolera CRLF.
+export function lerCabecalho(texto) {
+  const bloco = String(texto ?? '').replace(/^\uFEFF/, '').match(/^---[ \t]*\r?\n([\s\S]*?)\r?\n---/);
+  if (!bloco) return {};
+  const campos = {};
+  for (const linha of bloco[1].split(/\r?\n/)) {
+    const m = linha.match(/^\s*([^:#\s][^:]*?)\s*:\s*(.*?)\s*$/);
+    if (m) campos[m[1].toLowerCase()] = m[2];
+  }
+  return campos;
+}
+
 export function lerEstado(raiz) {
-  let texto;
   try {
-    texto = readFileSync(join(raiz, 'docs', 'projeto', 'ESTADO.md'), 'utf8');
+    return lerCabecalho(readFileSync(join(raiz, 'docs', 'projeto', 'ESTADO.md'), 'utf8'));
   } catch {
     return {};
   }
-  const bloco = texto.replace(/^\uFEFF/, '').match(/^---[ \t]*\r?\n([\s\S]*?)\r?\n---/);
-  if (!bloco) return {};
-  const estado = {};
-  for (const linha of bloco[1].split(/\r?\n/)) {
-    const m = linha.match(/^\s*([^:#\s][^:]*?)\s*:\s*(.*?)\s*$/);
-    if (m) estado[m[1].toLowerCase()] = m[2];
-  }
-  return estado;
 }
 
 const arquivoRapido = (raiz) => join(raiz, '.claude', 'kit-rapido');

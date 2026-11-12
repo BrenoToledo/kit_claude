@@ -26,7 +26,7 @@ Quebra o desenho em tarefas pequenas, cada uma em seu arquivo, com dependências
 
 6. **Grave `PLANO.md`** com a tabela `nº | tarefa | depende de | contratos | grupo paralelo | executor`, na ordem de execução. Mostre a tabela e peça aprovação.
 
-7. **Com o sim do usuário**, atualize `ESTADO.md`: `fase: execucao`, `proxima: execute a tarefa 001`.
+7. **Com o sim do usuário**, atualize `ESTADO.md`: `fase: execucao`, `proxima: rode /kit:executando na tarefa 001`.
 
 ## Conferência antes de pedir aprovação
 
@@ -36,4 +36,4 @@ Quebra o desenho em tarefas pequenas, cada uma em seu arquivo, com dependências
 - A ordem respeita a ordem de construção definida nos requisitos.
 - As tarefas de tela vêm depois do simulado aprovado.
 
-Próxima etapa: executar a tarefa 001, em conversa nova, lendo docs/projeto/tarefas/001-*.md e os contratos que ela cita.
+Próxima etapa: executando, em conversa nova, lendo docs/projeto/tarefas/001-*.md e os contratos que ela cita.

@@ -33,7 +33,7 @@ Proponha uma por vez. Execute só depois do sim. Os modelos ficam em `<diretóri
 Conteúdo de `.claude/kit-estado.json`:
 
 ```json
-{"ativo": true, "versao": "0.1.0", "tipo": "<tipoProjeto>", "data": "<AAAA-MM-DD>", "condutor": "kit"}
+{"ativo": true, "versao": "0.2.0", "tipo": "<tipoProjeto>", "data": "<AAAA-MM-DD>", "condutor": "kit"}
 ```
 
 ## 3. Convivência com outros plugins

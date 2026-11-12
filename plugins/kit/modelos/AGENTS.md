@@ -24,7 +24,7 @@ docs/projeto/
   contratos/<nome>.md  status: rascunho | congelado
   telas/               simulados aprovados
   PLANO.md             tarefas em ordem, dependências, grupos paralelos
-  tarefas/NNN-nome.md  status, responsável, contratos que usa
+  tarefas/NNN-nome.md  status, responsável, contratos que usa, segurança
   DECISOES.md          decisões e motivo
 ```
 
@@ -45,7 +45,8 @@ Leia só o que a etapa pede. Contexto pequeno é parte do método.
 - Para assumir uma tarefa: escreva seu nome em `responsavel`, mude `status` para `em-andamento` e faça commit. O commit é a trava.
 - Só assuma tarefa cujo `depende_de` está todo `pronta` e cujos contratos estão `congelado`.
 - Não altere contrato congelado dentro de uma tarefa. Registre a necessidade em `ESTADO.md` e pare: a mudança volta para o desenho.
-- Ao terminar: `status: pronta`, atualize `ESTADO.md` e faça commit.
+- Ao terminar a implementação: `status: em-revisao` e commit. A tarefa só vira `pronta` depois da verificação de segurança (`seguranca: ok`) e da revisão contra o contrato.
+- Ao marcar `pronta`: atualize `ESTADO.md` e faça commit.
 
 ## Segredos
 

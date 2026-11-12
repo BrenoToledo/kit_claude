@@ -292,7 +292,7 @@ Pronto quando: os testes dos hooks passam e um pedido de exemplo ("quero uma API
 
 Cada item abaixo recebe sua própria revisão antes de ser construído.
 
-1. `executando` (teste primeiro), `verificando-seguranca`, `revisando`, `handoff`.
+1. `executando` (teste primeiro), `verificando-seguranca`, `revisando`, `handoff`. **Feito em 2026-11-11.** A tarefa passa por `em-andamento` → `em-revisao` → `pronta`; um hook bloqueia `pronta` sem teste alterado desde o início da tarefa ou sem `seguranca: ok`.
 2. Pacote `django-api`.
 3. Biblioteca de componentes e `publicando-componente`.
 4. Orquestração do Antigravity.

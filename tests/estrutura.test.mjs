@@ -47,3 +47,15 @@ test('skills tem frontmatter', () => {
     assert.ok(palavras < 500, `${nome} tem ${palavras} palavras`);
   }
 });
+
+test('agentes tem frontmatter com nome, descricao e modelo', () => {
+  const pasta = join(plugin, 'agents');
+  for (const arq of readdirSync(pasta)) {
+    const txt = readFileSync(join(pasta, arq), 'utf8').replace(/\r\n/g, '\n');
+    const m = txt.match(/^---\n([\s\S]*?)\n---\n/);
+    assert.ok(m, `sem frontmatter: ${arq}`);
+    assert.match(m[1], new RegExp(`^name: ${arq.replace('.md', '')}$`, 'm'));
+    assert.match(m[1], /^description: .+/m);
+    assert.match(m[1], /^model: (haiku|sonnet|opus|inherit)$/m);
+  }
+});
