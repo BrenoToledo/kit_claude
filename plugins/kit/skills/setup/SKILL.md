@@ -5,7 +5,7 @@ description: Use quando o kit acabou de ser instalado, quando o aviso de início
 
 # Setup do kit
 
-Deixa o projeto e o Claude Code prontos para o método de nove regras. Primeiro diagnostica, sem alterar nada; depois corrige, um item por vez, só com o sim do usuário.
+Deixa o projeto e o Claude Code prontos para o método do kit. Primeiro diagnostica, sem alterar nada; depois corrige, um item por vez, só com o sim do usuário.
 
 ## 1. Diagnóstico
 
@@ -27,13 +27,14 @@ Proponha uma por vez. Execute só depois do sim. Os modelos ficam em `<diretóri
 | CLAUDE.md global com mais de 200 linhas | Propor versão enxuta; mostrar o que sai; manter o que é específico do usuário |
 | Sem AGENTS.md no projeto | Copiar `modelos/AGENTS.md` para a raiz |
 | Sem `docs/projeto/` | Criar com `ESTADO.md`, `DECISOES.md` e as pastas `contratos/`, `telas/`, `tarefas/` a partir de `modelos/projeto/` |
+| Sem `docs/padroes/LOG.md` | Copiar `modelos/padroes/LOG.md`; em projeto Python, oferecer também `modelos/log/python/kit_log.py` |
 | Kit inativo | Gravar `.claude/kit-estado.json` |
 | `.claude/kit-rapido` fora do `.gitignore` | Acrescentar a linha |
 
 Conteúdo de `.claude/kit-estado.json`:
 
 ```json
-{"ativo": true, "versao": "0.2.0", "tipo": "<tipoProjeto>", "data": "<AAAA-MM-DD>", "condutor": "kit"}
+{"ativo": true, "versao": "0.3.0", "tipo": "<tipoProjeto>", "data": "<AAAA-MM-DD>", "condutor": "kit"}
 ```
 
 ## 3. Convivência com outros plugins

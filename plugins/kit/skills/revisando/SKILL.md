@@ -25,6 +25,7 @@ description: Use quando uma tarefa está em em-revisao com seguranca ok, para co
    - **Regra 5:** nada além do necessário; nenhuma dependência nova sem justificativa.
    - **Escopo:** só arquivos da tarefa mudaram; nenhum contrato foi editado.
    - **Regra 9:** alguma peça serve a outros lugares? Se sim, está isolada? Anote em `Notas` como candidata à biblioteca.
+   - **Log:** todo caminho de erro novo registra `entrada`, `estado`, `erro` e `id_correlacao`, conforme `docs/padroes/LOG.md`, e há teste conferindo.
    - **Segurança:** `seguranca: ok` e a seção `## Segurança` preenchida.
 
 4. **Classifique cada achado:**

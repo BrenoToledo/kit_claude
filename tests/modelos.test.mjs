@@ -25,8 +25,8 @@ test('ESTADO modelo e lido por lerEstado', () => {
   });
 });
 
-test('AGENTS tem nove regras numeradas', () => {
-  assert.equal((ler('AGENTS.md').match(/^[1-9]\. \*\*/gm) || []).length, 9);
+test('AGENTS tem dez regras numeradas', () => {
+  assert.equal((ler('AGENTS.md').match(/^\d+\. \*\*/gm) || []).length, 10);
   assert.ok(!/claude code/i.test(ler('AGENTS.md')), 'AGENTS.md não pode depender do Claude Code');
 });
 
@@ -38,7 +38,7 @@ test('CLAUDE tem menos de 100 linhas', () => {
 test('contrato e tarefa tem os campos de frontmatter', () => {
   const c = ler('projeto', 'contrato.md');
   for (const campo of ['nome:', 'status:']) assert.ok(c.includes(campo), campo);
-  for (const s of ['Quem fornece', 'Quem consome', 'Entrada', 'Saída', 'Erros', 'Exemplo']) assert.match(c, new RegExp(`^## ${s}`, 'm'));
+  for (const s of ['Quem fornece', 'Quem consome', 'Entrada', 'Saída', 'Erros', 'Logs', 'Exemplo']) assert.match(c, new RegExp(`^## ${s}`, 'm'));
   const t = ler('projeto', 'tarefa.md');
   for (const campo of ['status:', 'responsavel:', 'depende_de:', 'contratos:', 'executor:']) assert.ok(t.includes(campo), campo);
   for (const s of ['Objetivo', 'Critério de pronto', 'Teste que prova', 'Notas']) assert.match(t, new RegExp(`^## ${s}`, 'm'));

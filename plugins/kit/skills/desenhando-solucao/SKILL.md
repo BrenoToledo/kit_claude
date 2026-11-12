@@ -15,7 +15,7 @@ Nesta etapa se produz desenho e documentos. A implementação começa depois do 
 
 2. **Liste as partes do sistema**, uma linha cada: nome e responsabilidade. Cada parte existe porque algum requisito pede.
 
-3. **Escreva um contrato para cada ligação entre partes**, a partir de `modelos/projeto/contrato.md` (em `<diretório base desta skill>/../../modelos/`), em `docs/projeto/contratos/<nome>.md`, com `status: rascunho`. Preencha as seis seções, com um exemplo real de entrada e saída.
+3. **Escreva um contrato para cada ligação entre partes**, a partir de `modelos/projeto/contrato.md` (em `<diretório base desta skill>/../../modelos/`), em `docs/projeto/contratos/<nome>.md`, com `status: rascunho`. Preencha todas as seções, com um exemplo real de entrada e saída e os eventos de log que a parte emite.
 
 4. **Se há API**, abra `padroes/api.md`, escolha o modelo pela tabela e registre a linha escolhida em `DECISOES.md`.
 

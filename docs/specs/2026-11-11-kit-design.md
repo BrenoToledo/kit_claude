@@ -108,6 +108,17 @@ Papéis: o Claude cuida de requisitos, desenho, contratos, plano e revisão. Tar
 - **Claude Code:** hooks bloqueiam (código sem requisito; implementação sem contrato citado na tarefa; interface sem simulado aprovado; fim de tarefa sem arquivo de teste alterado; fim de tarefa sem verificação).
 - **Outros agentes:** um `AGENTS.md` na raiz com as nove regras e o mapa de arquivos. Nesses a regra é instrução, sem bloqueio; a revisão final pega os desvios.
 
+### Regra 10 e padrão de log (acrescentados em 2026-11-11)
+
+10. **Toda falha deixa log suficiente para ser reproduzida.**
+
+- Padrão único em `docs/padroes/LOG.md`: uma linha JSON por evento; campos obrigatórios `ts`, `nivel`, `evento`, `msg`, `servico`, `versao`, `ambiente`, `id_correlacao`; em erro, também `entrada`, `estado` e `erro`.
+- Ferramentas independentes de linguagem: `validar-log.mjs` e `extrair-falha.mjs`.
+- Skill `reproduzindo-falha`: do log ao teste que falha, depois a correção.
+- Contrato ganha a seção `Logs`; `revisando` confere o registro de erro; `verificando-seguranca` confere dado sensível.
+- Referência em Python (`kit_log.py`), só com a biblioteca padrão.
+- Limite: o padrão garante a informação, não a reprodução automática; falha que depende de serviço externo ou de concorrência pode exigir mais do que o log.
+
 ## Distribuição
 
 Um repositório no GitHub que é ao mesmo tempo marketplace e plugin do Claude Code.

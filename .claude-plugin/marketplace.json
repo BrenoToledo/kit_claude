@@ -5,7 +5,7 @@
     {
       "name": "kit",
       "source": "./plugins/kit",
-      "description": "Método de desenvolvimento em nove regras para o Claude Code"
+      "description": "Método de desenvolvimento em dez regras para o Claude Code"
     }
   ]
 }

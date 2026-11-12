@@ -19,7 +19,7 @@ Depois, dentro do projeto:
 
 Requisito: Node.js 20 ou mais novo no PATH (os hooks são scripts Node, sem dependências).
 
-## As nove regras
+## As dez regras
 
 1. Requisito antes de tudo.
 2. Contrato antes de implementação.
@@ -30,6 +30,7 @@ Requisito: Node.js 20 ou mais novo no PATH (os hooks são scripts Node, sem depe
 7. Verificar antes de dizer pronto.
 8. Tela aprovada antes de tela codada.
 9. Reaproveitar antes de criar, e criar para reaproveitar.
+10. Toda falha deixa log suficiente para ser reproduzida.
 
 O texto completo vai para o `AGENTS.md` do seu projeto.
 
@@ -44,6 +45,7 @@ O texto completo vai para o `AGENTS.md` do seu projeto.
 | `/kit:executando` | Implementa uma tarefa, com teste primeiro |
 | `/kit:verificando-seguranca` | Confere o diff da tarefa contra o checklist de segurança |
 | `/kit:revisando` | Confere a tarefa contra o contrato e marca como pronta |
+| `/kit:reproduzindo-falha` | Do log ao teste que falha, e só então à correção |
 | `/kit:handoff` | Grava o estado para retomar em outra conversa ou por outra IA |
 | `/kit:rapido` | Libera os bloqueios de requisito e de simulado por 4 horas para um ajuste pequeno |
 
@@ -65,6 +67,17 @@ Só no Claude Code e no Cowork; no chat as skills funcionam, mas nada é bloquea
 | Início de sessão | Fase atual e próxima ação, em três linhas |
 
 Projeto ativo é aquele em que o `/kit:setup` rodou. Documentação e configuração (`docs/`, `.md`, `.json`, `.yaml` e afins) nunca são bloqueadas. Se um hook falhar por erro interno, ele libera.
+
+## Padrão de log
+
+Todo projeto segue `docs/padroes/LOG.md` (copiado pelo `/kit:setup`): uma linha JSON por evento, `id_correlacao` por requisição e, em todo erro, `entrada`, `estado` e `erro`. Duas ferramentas leem o log de qualquer linguagem:
+
+```
+node plugins/kit/hooks/validar-log.mjs app.jsonl
+node plugins/kit/hooks/extrair-falha.mjs app.jsonl <id_correlacao>
+```
+
+Há uma implementação de referência em Python em `plugins/kit/modelos/log/python/kit_log.py`.
 
 ## Arquivos do projeto
 

@@ -8,7 +8,7 @@ try {
   if (raiz && projetoAtivo(raiz)) {
     const estado = lerEstado(raiz);
     const linhas = [
-      `[kit] Projeto no método de nove regras. Fase: ${estado.fase || 'não iniciada'}.`,
+      `[kit] Projeto no método do kit. Fase: ${estado.fase || 'não iniciada'}.`,
       `[kit] Próxima ação: ${estado.proxima || 'rode /kit:levantando-requisitos'}.`,
       '[kit] Leia docs/projeto/ESTADO.md antes de agir. Regras em AGENTS.md.',
     ];

@@ -27,6 +27,10 @@ status: rascunho
 
 (cada erro possível: quando acontece e como é sinalizado)
 
+## Logs
+
+(eventos que esta parte emite: nome do `evento`, nível e quando acontece; em erro, o que vai em `entrada` e em `estado`)
+
 ## Exemplo
 
 (uma chamada completa com entrada e saída reais)

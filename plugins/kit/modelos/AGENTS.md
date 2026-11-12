@@ -2,7 +2,7 @@
 
 Este projeto segue um método fixo. Vale para qualquer pessoa ou IA que trabalhe aqui, em qualquer linguagem.
 
-## As nove regras
+## As dez regras
 
 1. **Requisito antes de tudo.** Nenhum código sem `docs/projeto/REQUISITOS.md` aprovado pelo dono do projeto.
 2. **Contrato antes de implementação.** Toda fronteira entre partes (módulo, API, tela e back, equipamento e banco) tem um arquivo de contrato: o que entra, o que sai, erros e um exemplo. Implementação só começa com o contrato escrito.
@@ -13,10 +13,12 @@ Este projeto segue um método fixo. Vale para qualquer pessoa ou IA que trabalhe
 7. **Verificar antes de dizer pronto.** Segurança e revisão contra o desenho; resultado gravado.
 8. **Tela aprovada antes de tela codada.** Todo trabalho visual começa por um simulado aprovado pelo dono do projeto.
 9. **Reaproveitar antes de criar, e criar para reaproveitar.** Peça que serve a mais de um lugar nasce isolada, sem depender do projeto.
+10. **Toda falha deixa log suficiente para ser reproduzida.** Log em JSON, com `id_correlacao`; todo erro registra a entrada, o estado e o erro. O padrão está em `docs/padroes/LOG.md`.
 
 ## Onde fica cada coisa
 
 ```
+docs/padroes/LOG.md     padrão de log
 docs/projeto/
   ESTADO.md            fase atual, última ação, próxima ação
   REQUISITOS.md
@@ -25,6 +27,7 @@ docs/projeto/
   telas/               simulados aprovados
   PLANO.md             tarefas em ordem, dependências, grupos paralelos
   tarefas/NNN-nome.md  status, responsável, contratos que usa, segurança
+  falhas/<id>.md       falhas extraídas do log, com o teste que reproduz
   DECISOES.md          decisões e motivo
 ```
 
