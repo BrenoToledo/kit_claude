@@ -4,7 +4,7 @@ Data: 2026-11-11.
 
 ## Verificado por teste automático
 
-`node --test`, em Linux com Node 22: 73 testes, 73 passaram. Cobre:
+`node --test`, em Linux com Node 22: 74 testes, 74 passaram. Cobre:
 
 - os quatro scripts de hook com entrada simulada, incluindo caminho do Windows, stdin vazio, JSON inválido, CRLF e sessão em subpasta;
 - o diagnóstico com pastas de usuário e de projeto simuladas;
@@ -36,3 +36,14 @@ Ou seja: os scripts estão testados; o comportamento das skills com um modelo re
 5. Pedir "quero uma API de pedidos para minha loja" e observar: uma pergunta por mensagem, as três perguntas de segurança, nenhuma sugestão de tecnologia, `REQUISITOS.md` completo, aprovação só com o seu sim.
 6. Em conversa nova, `/kit:desenhando-solucao`; depois, em outra, `/kit:planejando`.
 7. Anotar aqui o que funcionou e o que não funcionou.
+
+## Revisão final
+
+A revisão por um revisor independente não aconteceu: a chamada falhou por limite de uso da conta. Foi feita uma revisão pelo próprio autor, que é mais fraca. Ela encontrou e corrigiu um defeito: `git commit -m "... .env ..."` era bloqueado porque a mensagem era lida como lista de arquivos.
+
+Limitações conhecidas, não corrigidas:
+
+- O detector de segredos também bloqueia senha falsa escrita em arquivo de teste.
+- Código escrito por comando de terminal (`echo > app.py`) não passa pelo bloqueio de requisito; só as ferramentas de escrita de arquivo passam.
+- Imagens e outros binários contam como código para o bloqueio.
+- O campo `condutor` de `kit-estado.json` é gravado pelo setup, mas nenhum hook o lê ainda.

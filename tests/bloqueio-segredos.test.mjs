@@ -103,3 +103,10 @@ test('stdin vazio libera', () => {
   assert.equal(r.codigo, 0);
   assert.equal(r.stderr, '');
 });
+
+test('mensagem de commit que cita .env nao bloqueia', () => {
+  assert.equal(bash('/tmp', 'git commit -m "trata o arquivo .env na leitura"').codigo, 0);
+  assert.equal(bash('/tmp', "git commit -m 'remove id_rsa do exemplo' && git push").codigo, 0);
+  assert.equal(bash('/tmp', 'git commit --message="ajusta .env.production"').codigo, 0);
+  assert.equal(bash('/tmp', 'git add .env -m "x"').codigo, 2);
+});

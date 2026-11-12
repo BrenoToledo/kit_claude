@@ -58,7 +58,9 @@ function decidirEscrita(ti) {
 
 function decidirBash(comando, cwd) {
   if (typeof comando !== 'string' || !/\bgit\s+(add|commit)\b/.test(comando)) return null;
-  const palavras = comando.split(/[\s;&|]+/).map((p) => p.replace(/^["']|["']$/g, ''));
+  // A mensagem do commit é texto livre: não conta como lista de arquivos.
+  const semMensagem = comando.replace(/(-m|--message)(\s+|=)("[^"]*"|'[^']*'|\S+)/g, ' ');
+  const palavras = semMensagem.split(/[\s;&|]+/).map((p) => p.replace(/^["']|["']$/g, ''));
   if (palavras.some((p) => p && !p.startsWith('-') && nomeSecreto(p))) return 'arquivo de segredos no commit';
   const tudo = /\bgit\s+add\s+(-A|--all|\.)(?=\s|$|[;&|])/.test(comando) || /\bgit\s+commit\s+(?:-[a-zA-Z]*a[a-zA-Z]*|--all)\b/.test(comando);
   if (!tudo) return null;
