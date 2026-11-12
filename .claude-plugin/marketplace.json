@@ -1,0 +1,11 @@
+{
+  "name": "kit-claude",
+  "owner": { "name": "Breno Toledo" },
+  "plugins": [
+    {
+      "name": "kit",
+      "source": "./plugins/kit",
+      "description": "Método de desenvolvimento em nove regras para o Claude Code"
+    }
+  ]
+}

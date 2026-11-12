@@ -1,0 +1,7 @@
+{
+  "name": "kit",
+  "version": "0.1.0",
+  "description": "Método de desenvolvimento em nove regras para o Claude Code",
+  "author": { "name": "Breno Toledo" },
+  "repository": "https://github.com/BrenoToledo/kit_claude"
+}
