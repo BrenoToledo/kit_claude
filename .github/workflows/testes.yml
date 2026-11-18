@@ -24,5 +24,5 @@ jobs:
       - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6.8.0
         with:
           python-version: "3.12"
-      - run: uv tool install git+https://github.com/NVIDIA/skillspector.git@c7958a3268d9498644b22edb75d0f051bbc8cbfc # v2.12.0
+      - run: uv tool install git+https://github.com/NVIDIA/skillspector.git@a09091e0ebf6c96ff327457529d7b0d372125884 # main de 2026-11-18
       - run: node plugins/kit/hooks/analisar-skill.mjs plugins/kit
