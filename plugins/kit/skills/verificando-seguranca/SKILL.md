@@ -24,7 +24,8 @@ Confere o que a tarefa mudou contra um checklist fixo. O resultado fica no próp
    - consulta a banco com parâmetros, sem montar texto com dado do usuário;
    - mensagem de erro sem detalhe interno (caminho, consulta, pilha);
    - dado sensível fora de log ou mascarado (se houver arquivo de log de teste, rode `validar-log.mjs` nele);
-   - dependência nova: justificada e de fonte conhecida.
+   - dependência nova: justificada e de fonte conhecida;
+   - skill, plugin ou servidor MCP novo ou alterado (arquivo `SKILL.md`, pasta `skills/`, `.claude/skills/`, `.mcp.json`): rode `node "<diretório base desta skill>/../../hooks/analisar-skill.mjs" <pasta>`. Código 0 é `ok`; código 1 vira achado, salvo se o usuário aceitar cada item; código 2 é achado; código 3 ou 4 é "não avaliado", com o motivo.
 
    Em automação industrial: nenhum controlador exposto à internet; leitura por padrão; escrita em controlador só com confirmação do usuário.
 

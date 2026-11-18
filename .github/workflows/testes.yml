@@ -14,3 +14,15 @@ jobs:
         with:
           python-version: "3.12"
       - run: node --test
+  skillspector:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv tool install git+https://github.com/NVIDIA/skillspector.git
+      - run: node plugins/kit/hooks/analisar-skill.mjs plugins/kit

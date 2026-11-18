@@ -15,7 +15,7 @@ Rode, a partir da raiz do projeto:
 node "<diretório base desta skill>/../../hooks/diagnostico.mjs"
 ```
 
-O diretório base é informado quando esta skill carrega. Mostre o resultado em uma tabela `item | situação | ação proposta`, com uma linha para: CLAUDE.md global, CLAUDE.md do projeto, AGENTS.md, estado do projeto (`docs/projeto/`), `run.bat`, kit ativo, plugins instalados, ferramentas (headroom, rtk, agy, gh), proxy e tipo do projeto.
+O diretório base é informado quando esta skill carrega. Mostre o resultado em uma tabela `item | situação | ação proposta`, com uma linha para: CLAUDE.md global, CLAUDE.md do projeto, AGENTS.md, estado do projeto (`docs/projeto/`), `run.bat`, kit ativo, plugins instalados, ferramentas (headroom, rtk, agy, gh, skillspector), proxy e tipo do projeto.
 
 ## 2. Correções
 
@@ -37,7 +37,7 @@ Proponha uma por vez. Execute só depois do sim. Os modelos ficam em `<diretóri
 Conteúdo de `.claude/kit-estado.json`:
 
 ```json
-{"ativo": true, "versao": "0.5.0", "tipo": "<tipoProjeto>", "data": "<AAAA-MM-DD>", "condutor": "kit", "repositorioKit": "BrenoToledo/kit_claude"}
+{"ativo": true, "versao": "0.6.0", "tipo": "<tipoProjeto>", "data": "<AAAA-MM-DD>", "condutor": "kit", "repositorioKit": "BrenoToledo/kit_claude"}
 ```
 
 ## 3. Convivência com outros plugins
@@ -46,9 +46,13 @@ Se `plugins` contém `superpowers`, pergunte qual dos dois conduz o processo nes
 
 ## 4. Ferramentas ausentes
 
-Para headroom, rtk, agy e gh ausentes, mostre o comando de instalação e o que a ferramenta faz. Deixe a instalação com o usuário: são programas de terceiros rodando na máquina dele.
+Para headroom, rtk, agy, gh e skillspector ausentes, mostre o comando de instalação e o que a ferramenta faz. Deixe a instalação com o usuário: são programas de terceiros rodando na máquina dele.
 
-## 5. Encerramento
+## 5. Skills e plugins de terceiros
+
+Antes de propor a instalação de qualquer skill, plugin ou servidor MCP de fora do kit, siga `terceiros.md`, nesta pasta. Pacote com DO NOT INSTALL não é instalado.
+
+## 6. Encerramento
 
 Mostre a tabela final com o que mudou e termine com:
 

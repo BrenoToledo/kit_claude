@@ -73,7 +73,7 @@ const resultado = {
   skillsGlobais: listar(join(home, '.claude', 'skills')).filter((d) => d.isDirectory()).map((d) => d.name).sort(),
   plugins: plugins(),
   hooksUsuario: ajustes.hooks && typeof ajustes.hooks === 'object' ? Object.keys(ajustes.hooks) : [],
-  ferramentas: { headroom: noPath('headroom'), rtk: noPath('rtk'), agy: noPath('agy'), gh: noPath('gh') },
+  ferramentas: { headroom: noPath('headroom'), rtk: noPath('rtk'), agy: noPath('agy'), gh: noPath('gh'), skillspector: noPath('skillspector') },
   proxy: process.env.ANTHROPIC_BASE_URL ?? ajustes.env?.ANTHROPIC_BASE_URL ?? null,
   tipoProjeto: tipoProjeto(),
   kitAtivo: projetoAtivo(raiz),
