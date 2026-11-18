@@ -77,6 +77,22 @@ O `/kit:setup` copia para `docs/padroes/` oito arquivos de boas práticas, indep
 
 Quando uma etapa encontra algo crítico, a skill `/kit:registrando-aprendizado` grava o relato no projeto e, com a sua confirmação, abre um pedido de mesclagem neste repositório, em `aprendizados/`. Precisa do `gh` instalado e autenticado.
 
+## Skills e plugins de terceiros
+
+Antes de instalar uma skill, plugin ou servidor MCP de fora do kit, o `/kit:setup` passa o pacote pelo [SkillSpector](https://github.com/NVIDIA/SkillSpector), da NVIDIA:
+
+```
+node plugins/kit/hooks/analisar-skill.mjs <pasta | SKILL.md | .zip | URL>
+```
+
+Código de saída: 0 SAFE, 1 CAUTION (instala só com o seu sim), 2 DO NOT INSTALL (não instala), 3 SkillSpector ausente, 4 erro na análise. A análise padrão é só estática e nada sai da máquina; `--llm` acrescenta a análise semântica e envia o conteúdo ao provedor configurado. O `/kit:verificando-seguranca` roda a mesma análise quando a tarefa mexe em skills, e o CI deste repositório analisa as skills do próprio kit a cada push.
+
+Instalação (Python 3.12+ e `uv`):
+
+```
+uv tool install git+https://github.com/NVIDIA/skillspector.git
+```
+
 ## Medição
 
 ```

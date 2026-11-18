@@ -25,6 +25,7 @@ test('pasta vazia', () => {
   assert.equal(d.kitAtivo, false);
   assert.equal(d.proxy, null);
   assert.equal(typeof d.ferramentas.headroom, 'boolean');
+  assert.equal(typeof d.ferramentas.skillspector, 'boolean');
 });
 
 test('projeto django', () => {
