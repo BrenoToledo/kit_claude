@@ -80,9 +80,9 @@ if (codigo === 2) registrarEvento(raizProjeto, 'skill_bloqueada');
 if (args.includes('--json')) {
   console.log(JSON.stringify(resumo, null, 2));
 } else {
-  const texto = String(resumo.recomendacao ?? 'DESCONHECIDA').replace(/_/g, ' ');
+  const texto = String(resumo.recomendacao ?? 'DESCONHECIDA').replaceAll('_', ' ');
   console.log(`SkillSpector: ${texto} (nota ${resumo.nota ?? '?'}/100)${args.includes('--llm') ? '' : ' — só análise estática'}`);
-  for (const s of resumo.skills ?? []) console.log(`  ${s.nome}: ${String(s.recomendacao).replace(/_/g, ' ')} (${s.nota ?? '?'}/100)`);
+  for (const s of resumo.skills ?? []) console.log(`  ${s.nome}: ${String(s.recomendacao).replaceAll('_', ' ')} (${s.nota ?? '?'}/100)`);
   for (const a of resumo.achados.slice(0, MAX_ACHADOS)) {
     console.log(`- ${a.severidade} ${a.categoria} — ${a.skill ? a.skill + '/' : ''}${a.local} — ${a.trecho}`);
   }
